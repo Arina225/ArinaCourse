@@ -1,0 +1,110 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Аккаунт</h1>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		<div *ngIf="role === 'TRAINER'" class="col-12 col-lg-4 mb-3" data-aos="fade-down">
+			<div class="card card-body">
+				<img [src]="img" alt="img" class="object-fit-cover w-100 shadow rounded mb-3" height="400">
+				<input type="file" (change)="changeImg($event)" class="form-control" accept="image/*">
+			</div>
+		</div>
+		<div class="col-12 col-lg mb-3" data-aos="fade-down">
+			<div class="card card-body">
+				<form [formGroup]="accountFormGroup" (ngSubmit)="update()" class="row">
+					<div class="col-12 col-lg-6 mb-2">
+						<p class="fs-4 m-0">ФИО</p>
+						<input type="text" formControlName="fio" class="form-control" minlength="1" maxlength="255">
+					</div>
+					<div class="col-12 col-lg-6 mb-2">
+						<p class="fs-4 m-0">Телефон</p>
+						<input type="tel" formControlName="tel" class="form-control" minlength="1" maxlength="255">
+					</div>
+					<div *ngIf="role === 'TRAINER'" class="col-12 col-lg-6 mb-2">
+						<p class="fs-4 m-0">Образование</p>
+						<input type="text" formControlName="educate" class="form-control" minlength="1" maxlength="255">
+					</div>
+					<div *ngIf="role === 'TRAINER'" class="col-12 col-lg-6 mb-2">
+						<p class="fs-4 m-0">Специализация</p>
+						<input type="text" formControlName="speciality" class="form-control" minlength="1"
+							   maxlength="255">
+					</div>
+					<div *ngIf="role === 'CLIENT'" class="col-12 col-lg-4 mb-2">
+						<p class="fs-4 m-0">Дата рождения</p>
+						<input type="date" formControlName="date" class="form-control">
+					</div>
+					<div *ngIf="role === 'CLIENT'" class="col-12 col-lg-4 mb-2">
+						<p class="fs-4 m-0">Пол</p>
+						<select (change)="changeGender($event)" class="form-select">
+							<option *ngFor="let g of genders | keyvalue" [label]="g.value" [value]="g.key"
+									[selected]="g.key === gender"></option>
+						</select>
+					</div>
+					<div *ngIf="role === 'CLIENT'" class="col-12 col-lg-4 mb-2">
+						<p class="fs-4 m-0">Возрастная категория</p>
+						<select (change)="changeAgeCategory($event)" class="form-select">
+							<option *ngFor="let a of ageCategories | keyvalue" [label]="a.value" [value]="a.key"
+									[selected]="a.key === ageCategory"></option>
+						</select>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="btn btn-success w-100" [disabled]="!checkSubmit()">Обновить
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div *ngIf="ticketOrderings.length > 0" class="container mt-3">
+
+	<p class="fs-2 text-center mb-3" data-aos="fade-down">Абонементы</p>
+
+	<div class="row">
+		@for (i of ticketOrderings; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card">
+					<a appNavigate [navigateURL]="'ticket'" [queryParams]="{id:i.ticketId}" role="button">
+						<div class="card-header p-0 shadow-sm">
+							<img [src]="i.ticketImg" alt="img" class="object-fit-cover w-100 rounded-top"
+								 height="300">
+						</div>
+					</a>
+					<div class="card-body">
+						<p class="fs-4 text-center mb-2">{{ i.ticketName }}</p>
+						<p class="fs-5 m-0">{{ 'Статус: ' + i.statusName }}</p>
+						<p class="fs-5 m-0">{{ 'Цена: ' + i.price }}</p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+<div *ngIf="trainingOrderings.length > 0" class="container mt-3">
+
+	<p class="fs-2 text-center mb-3" data-aos="fade-down">Тренировки</p>
+
+	<div class="row">
+		@for (i of trainingOrderings; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card">
+					<div class="card-body">
+						<p class="fs-4 mb-2 text-center">{{ i.training.name }}</p>
+						<p class="fs-5 m-0">{{ 'Статус: ' + i.statusName }}</p>
+						<p class="fs-5 m-0">{{ 'Тренер: ' + i.trainerFio }}</p>
+						<p class="fs-5 m-0">{{ 'Дата: ' + i.training.date }}</p>
+						<p class="fs-5 m-0">{{ 'Продолжительность: ' + i.training.duration + ' ч.' }}</p>
+						<p class="fs-5 m-0">{{ 'Стоимость: ' + i.training.price }}</p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

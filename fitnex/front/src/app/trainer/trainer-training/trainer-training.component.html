@@ -1,0 +1,36 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Тренировки</h1>
+
+	<div class="row d-flex justify-content-center mt-3" data-aos="fade-down">
+		<div class="col-auto fs-5 text-success">
+			<a appNavigate [navigateURL]="'trainers'" role="button">Назад</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		@for (i of trainingsSorted; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card">
+					<div class="card-body">
+						<p class="fs-4 mb-2 text-center">{{ i.name }}</p>
+						<p class="fs-5 m-0">{{ 'Дата: ' + i.date }}</p>
+						<p class="fs-5 m-0">{{ 'Продолжительность: ' + i.duration + ' ч.' }}</p>
+						<p class="fs-5 m-0">{{ 'Количество мест: ' + i.places }}</p>
+						<p class="fs-5 m-0">{{ 'Свободно: ' + i.free }}</p>
+						<p class="fs-5 m-0">{{ 'Стоимость: ' + i.price }}</p>
+					</div>
+					<div *ngIf="role === 'CLIENT' && i.free > 0 && checkOrdering(i)" class="card-footer">
+						<button type="button" (click)="ordering(i.id)" class="btn btn-success w-100">Оформить</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+</div>
+

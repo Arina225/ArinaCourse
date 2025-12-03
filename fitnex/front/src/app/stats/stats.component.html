@@ -1,0 +1,32 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Аналитика</h1>
+
+	<div class="row d-flex justify-content-center mt-3" data-aos="fade-down">
+		<div class="col-auto fs-5 text-success">
+			<a (click)="generatePDF()" role="button">PDF</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div id="pdf">
+		<div class="mb-4" data-aos="fade-down">
+			<p class="fs-4 m-0">Клиенты по возрастным категориям</p>
+			<app-stats-age-categories></app-stats-age-categories>
+		</div>
+
+		<div class="mb-4" data-aos="fade-down">
+			<p class="fs-4 m-0">Клиенты по полу</p>
+			<app-stats-genders></app-stats-genders>
+		</div>
+
+		<div class="mb-4" data-aos="fade-down">
+			<p class="fs-4 m-0">Топ-5 абонементов по прибыли</p>
+			<app-stats-tickets></app-stats-tickets>
+		</div>
+	</div>
+
+</div>

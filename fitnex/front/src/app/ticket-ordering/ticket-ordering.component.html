@@ -1,0 +1,34 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Заявки</h1>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		@for (i of orderings; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card">
+					<a appNavigate [navigateURL]="'ticket'" [queryParams]="{id:i.ticketId}" role="button">
+						<div class="card-header p-0 shadow-sm">
+							<img [src]="i.ticketImg" alt="img" class="object-fit-cover w-100 rounded-top"
+								 height="300">
+						</div>
+					</a>
+					<div class="card-body">
+						<p class="fs-4 text-center mb-2">{{ i.ticketName }}</p>
+						<p class="fs-5 m-0">{{ 'Статус: ' + i.statusName }}</p>
+						<p class="fs-5 m-0">{{ 'Клиент: ' + i.clientFio }}</p>
+						<p class="fs-5 m-0">{{ 'Цена: ' + i.price }}</p>
+					</div>
+					<div *ngIf="i.status === 'WAITING'" class="card-footer">
+						<button type="button" (click)="confirmed(i.id)" class="btn btn-success w-100 mb-2">Подтвердить</button>
+						<button type="button" (click)="rejected(i.id)" class="btn btn-warning w-100">Отклонить</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+</div>

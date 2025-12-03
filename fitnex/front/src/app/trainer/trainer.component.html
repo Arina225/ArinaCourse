@@ -1,0 +1,32 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Тренеры</h1>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		@for (i of trainersSorted; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card">
+					<div class="card-header p-0 shadow-sm">
+						<img [src]="i.profile.img" alt="img" class="object-fit-cover w-100 rounded-top"
+							 height="300">
+					</div>
+					<div class="card-body">
+						<p class="fs-4 text-center mb-2">{{ i.profile.fio }}</p>
+						<p class="fs-5 m-0">{{ 'Образование: ' + i.profile.educate }}</p>
+						<p class="fs-5 m-0">{{ 'Специализация: ' + i.profile.speciality }}</p>
+						<a appNavigate [navigateURL]="'trainer_trainings'" [queryParams]="{id:i.id}" role="button"
+						   class="btn btn-success w-100 mt-2">
+							Тренировки
+						</a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+</div>
+

@@ -1,0 +1,35 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Абонементы</h1>
+
+	<div *ngIf="role === 'ADMIN'" class="row d-flex justify-content-center mt-3" data-aos="fade-down">
+		<div class="col-auto fs-5 text-success">
+			<a appNavigate [navigateURL]="'ticket_add'" role="button">Добавить</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		@for (i of ticketsSorted; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<a appNavigate [navigateURL]="'ticket'" [queryParams]="{id:i.id}" role="button">
+					<div class="card">
+						<div class="card-header p-0 shadow-sm">
+							<img [src]="i.img" alt="img" class="object-fit-cover w-100 rounded-top"
+								 height="300">
+						</div>
+						<div class="card-body">
+							<p class="fs-4 text-center mb-2">{{ i.name }}</p>
+							<p class="fs-5 m-0">{{ 'Цена: ' + i.price }}</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		}
+	</div>
+
+</div>
+

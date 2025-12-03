@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg bg-success shadow" data-bs-theme="dark">
+	<div class="container">
+		<a appNavigate [navigateURL]="''" class="navbar-brand" role="button">Fitnex</a>
+		<button aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"
+				class="navbar-toggler" data-bs-target="#navbarColor01" data-bs-toggle="collapse" type="button">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mx-auto">
+
+				<li class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="''" class="nav-link" role="button">Главная</a>
+				</li>
+				<li class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'tickets'" class="nav-link" role="button">Абонементы</a>
+				</li>
+				<li class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'trainers'" class="nav-link" role="button">Тренеры</a>
+				</li>
+
+				<li *ngIf="role === 'TRAINER'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'trainings'" class="nav-link" role="button">Тренировки</a>
+				</li>
+				<li *ngIf="role === 'TRAINER'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'trainings_orderings'" class="nav-link" role="button">Заявки</a>
+				</li>
+
+				<li *ngIf="role === 'ADMIN'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'tickets_orderings'" class="nav-link" role="button">Заявки</a>
+				</li>
+				<li *ngIf="role === 'ADMIN'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'users'" class="nav-link" role="button">Пользователи</a>
+				</li>
+				<li *ngIf="role === 'ADMIN'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'stats'" class="nav-link" role="button">Аналитика</a>
+				</li>
+
+			</ul>
+			<ul class="navbar-nav">
+				<li *ngIf="role === 'CLIENT' || role == 'TRAINER'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'account'" class="nav-link" role="button">Аккаунт</a>
+				</li>
+
+				<li *ngIf="role === 'NOT'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'login'" class="nav-link" role="button">Вход</a>
+				</li>
+				<li *ngIf="role === 'NOT'" class="nav-item" data-aos="fade-down">
+					<a appNavigate [navigateURL]="'reg'" class="nav-link" role="button">Регистрация</a>
+				</li>
+				<li *ngIf="role !== 'NOT'" class="nav-item" data-aos="fade-down">
+					<a (click)="logout()" class="nav-link" role="button">Выход</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

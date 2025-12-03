@@ -1,0 +1,47 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">{{ ticket.name }}</h1>
+
+	<div class="row d-flex justify-content-center mt-3 fs-5 text-success" data-aos="fade-down">
+		<div class="col-auto">
+			<a appNavigate [navigateURL]="'tickets'" role="button">Назад</a>
+		</div>
+		<div class="col-auto">/</div>
+		<div class="col-auto">
+			<a [href]="ticket.file" target="_blank" class="text-decoration-none text-success">Файл</a>
+		</div>
+
+		<div *ngIf="role === 'CLIENT'" class="col-auto">/</div>
+		<div *ngIf="role === 'CLIENT'" class="col-auto">
+			<a (click)="ordering()" role="button" class="text-success text-decoration-none">Оформить</a>
+		</div>
+
+		<div *ngIf="role === 'ADMIN'" class="col-auto">/</div>
+		<div *ngIf="role === 'ADMIN'" class="col-auto">
+			<a appNavigate [navigateURL]="'ticket_update'" [queryParams]="{id:ticket.id}" role="button">Обновить</a>
+		</div>
+		<div *ngIf="role === 'ADMIN'" class="col-auto">/</div>
+		<div *ngIf="role === 'ADMIN'" class="col-auto">
+			<a (click)="delete()" role="button" class="text-danger text-decoration-none">Удалить</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-12 col-lg-4 mb-3" data-aos="fade-down">
+			<div class="card card-body">
+				<img [src]="ticket.img" alt="img" class="object-fit-cover w-100 rounded shadow" height="400">
+			</div>
+		</div>
+		<div class="col-12 col-lg mb-3" data-aos="fade-down">
+			<div class="card card-body">
+				<p class="fs-4 m-0">{{ 'Цена: ' + ticket.price }}</p>
+			</div>
+		</div>
+	</div>
+
+</div>
+

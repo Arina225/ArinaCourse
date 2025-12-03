@@ -1,0 +1,32 @@
+<div class="container-fluid py-5">
+
+	<h1 class="text-center" data-aos="fade-down">Тренировки</h1>
+
+	<div class="row d-flex justify-content-center mt-3" data-aos="fade-down">
+		<div class="col-auto fs-5 text-success">
+			<a appNavigate [navigateURL]="'training_add'" role="button">Добавить</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+
+	<div class="row">
+		@for (i of trainingsSorted; track i.id) {
+			<div class="col-12 col-lg-4 mb-4" data-aos="fade-down">
+				<div class="card card-body">
+					<p class="fs-4 mb-2 text-center">{{ i.name }}</p>
+					<p class="fs-5 m-0">{{ 'Дата: ' + i.date }}</p>
+					<p class="fs-5 m-0">{{ 'Продолжительность: ' + i.duration + ' ч.' }}</p>
+					<p class="fs-5 m-0">{{ 'Количество мест: ' + i.places }}</p>
+					<p class="fs-5 m-0">{{ 'Стоимость: ' + i.price }}</p>
+					<a appNavigate [navigateURL]="'training_update'" [queryParams]="{id:i.id}" role="button" class="btn btn-success w-100 mt-2">Обновить</a>
+					<a (click)="delete(i.id)" role="button" class="btn btn-danger w-100 mt-2">Удалить</a>
+				</div>
+			</div>
+		}
+	</div>
+
+</div>
+
